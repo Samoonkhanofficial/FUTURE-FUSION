@@ -1,0 +1,11 @@
+#' Fit LSTM Model
+#' @export
+fit_lstm <- function(train_x, train_y, val_x, val_y, epochs = 30, batch_size = 32) {
+  library(keras)
+  model <- keras_model_sequential() %>%
+    layer_lstm(units = 32, input_shape = c(dim(train_x)[2], dim(train_x)[3])) %>%
+    layer_dense(units = 1)
+  model %>% compile(loss = "mae", optimizer = "adam")
+  model %>% fit(train_x, train_y, validation_data = list(val_x, val_y), epochs = epochs, batch_size = batch_size, verbose = 0)
+  model
+}
