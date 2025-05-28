@@ -1,0 +1,19 @@
+#' Plot Actual vs Predicted with CI
+#' @export
+plot_futurefusion <- function(df) {
+  library(ggplot2)
+  library(patchwork)
+  p1 <- ggplot(df, aes(x = Date)) +
+    geom_line(aes(y = Actual), color = "black", size = 1.2, alpha = 0.8) +
+    geom_line(aes(y = Fusion), color = "blue", linetype = "dashed") +
+    geom_line(aes(y = LSTM), color = "red", alpha = 0.4) +
+    geom_line(aes(y = XGB), color = "green", alpha = 0.4) +
+    geom_ribbon(aes(ymin = Lower, ymax = Upper), fill = "blue", alpha = 0.2) +
+    theme_minimal() +
+    labs(title = "Future-Fusion Digital Asset Price Prediction", y = "Price", x = "Date")
+  p2 <- ggplot(df, aes(x = Date, y = Actual - Fusion)) +
+    geom_line(color = "purple", size = 1) +
+    theme_minimal() +
+    labs(title = "Residuals (Actual - Fusion)", y = "Residual", x = "Date")
+  p1 / p2
+}
