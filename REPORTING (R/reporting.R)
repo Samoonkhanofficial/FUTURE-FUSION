@@ -1,0 +1,14 @@
+#' Model Report
+#' @export
+futurefusion_report <- function(df) {
+  cat("=== FUTURE-FUSION REPORT ===\n")
+  print(summary(df))
+  cat("\nPerformance Metrics:\n")
+  mae <- mean(abs(df$Actual - df$Fusion))
+  rmse <- sqrt(mean((df$Actual - df$Fusion)^2))
+  cat("MAE:", round(mae, 4), "\n")
+  cat("RMSE:", round(rmse, 4), "\n")
+  cat("95% CI (Prediction):", 
+      round(mean(df$Lower, na.rm = TRUE), 4), "-",
+      round(mean(df$Upper, na.rm = TRUE), 4), "\n")
+}
