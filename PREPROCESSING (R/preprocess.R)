@@ -1,0 +1,14 @@
+#' Preprocess Data: Lags, Scaling
+#' @export
+futurefusion_preprocess <- function(data, target_col, n_lag = 10) {
+  library(data.table)
+  library(caret)
+  data <- as.data.table(data)
+  for (i in 1:n_lag) {
+    data[[paste0(target_col, "_lag", i)]] <- shift(data[[target_col]], i)
+  }
+  data <- na.omit(data)
+  preProc <- preProcess(data, method = c("center", "scale"))
+  data_norm <- predict(preProc, data)
+  list(data = data_norm, scaler = preProc)
+}
