@@ -1,0 +1,7 @@
+#' Fit SVR Model
+#' @export
+fit_svr <- function(train_x, train_y, test_x) {
+  library(e1071)
+  model <- svm(train_x, train_y, type = "eps-regression")
+  predict(model, test_x)
+}
