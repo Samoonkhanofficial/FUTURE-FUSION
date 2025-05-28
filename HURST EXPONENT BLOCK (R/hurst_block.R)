@@ -1,0 +1,6 @@
+#' Hurst Exponent
+#' @export
+hurst_exponent <- function(series) {
+  library(pracma)
+  hurstexp(series)$Hs
+}
