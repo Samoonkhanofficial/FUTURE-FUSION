@@ -1,0 +1,7 @@
+#' Uncertainty CI by Bootstrap
+#' @export
+uncertainty_ci <- function(preds, n_boot = 500) {
+  boot_means <- replicate(n_boot, mean(sample(preds, replace = TRUE)))
+  ci <- quantile(boot_means, c(0.025, 0.975))
+  list(mean = mean(preds), lower = ci[1], upper = ci[2])
+}
