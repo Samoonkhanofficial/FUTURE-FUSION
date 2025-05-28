@@ -1,0 +1,10 @@
+#' Fit XGBoost Model
+#' @export
+fit_xgb <- function(train_x, train_y, test_x) {
+  library(xgboost)
+  dtrain <- xgb.DMatrix(data = as.matrix(train_x), label = train_y)
+  dtest <- xgb.DMatrix(data = as.matrix(test_x))
+  params <- list(objective = "reg:squarederror", eval_metric = "rmse")
+  model <- xgb.train(params, dtrain, nrounds = 100, verbose = 0)
+  predict(model, dtest)
+}
