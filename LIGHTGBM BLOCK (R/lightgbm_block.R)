@@ -1,0 +1,9 @@
+#' Fit LightGBM Model
+#' @export
+fit_lightgbm <- function(train_x, train_y, test_x) {
+  library(lightgbm)
+  dtrain <- lgb.Dataset(as.matrix(train_x), label = train_y)
+  params <- list(objective = "regression", metric = "rmse")
+  model <- lgb.train(params, dtrain, nrounds = 100, verbose = -1)
+  predict(model, as.matrix(test_x))
+}
