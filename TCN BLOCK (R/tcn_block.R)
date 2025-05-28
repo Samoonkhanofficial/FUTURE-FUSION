@@ -1,0 +1,12 @@
+#' Fit Temporal Convolutional Network Model
+#' @export
+fit_tcn <- function(train_x, train_y, val_x, val_y, epochs = 30, batch_size = 32) {
+  library(keras)
+  model <- keras_model_sequential() %>%
+    layer_conv_1d(filters = 32, kernel_size = 3, activation = "relu", input_shape = c(dim(train_x)[2], dim(train_x)[3])) %>%
+    layer_global_max_pooling_1d() %>%
+    layer_dense(units = 1)
+  model %>% compile(loss = "mae", optimizer = "adam")
+  model %>% fit(train_x, train_y, validation_data = list(val_x, val_y), epochs = epochs, batch_size = batch_size, verbose = 0)
+  model
+}
