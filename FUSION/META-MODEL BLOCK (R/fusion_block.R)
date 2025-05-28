@@ -1,0 +1,8 @@
+#' Model Fusion (Weighted)
+#' @export
+fusion_predict <- function(preds, weights = NULL) {
+  n_models <- length(preds)
+  preds_mat <- do.call(cbind, preds)
+  if (is.null(weights)) weights <- rep(1/n_models, n_models)
+  as.numeric(preds_mat %*% weights)
+}
