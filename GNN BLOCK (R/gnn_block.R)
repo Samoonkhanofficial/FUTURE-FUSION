@@ -1,0 +1,8 @@
+#' GNN Prediction (Python integration stub)
+#' @export
+fit_gnn <- function(graph_data, features, labels) {
+  # Integration via reticulate/Python (placeholder)
+  # Documentation in README for setting up Python GNN with PyTorch Geometric
+  message("GNN block requires Python integration (see README for details).")
+  return(rep(NA, length(labels)))
+}
