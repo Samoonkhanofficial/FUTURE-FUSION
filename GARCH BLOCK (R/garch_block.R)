@@ -1,0 +1,8 @@
+#' Fit GARCH Model
+#' @export
+fit_garch <- function(series) {
+  library(rugarch)
+  spec <- ugarchspec(variance.model = list(model = "sGARCH"), mean.model = list(armaOrder = c(1,1)))
+  fit <- ugarchfit(spec, series)
+  sigma(fit)
+}
