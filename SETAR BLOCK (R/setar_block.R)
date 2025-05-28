@@ -1,0 +1,7 @@
+#' Fit SETAR Model
+#' @export
+fit_setar <- function(ts_series, m = 2, thDelay = 1) {
+  library(tsDyn)
+  model <- setar(ts_series, m = m, thDelay = thDelay)
+  as.numeric(predict(model, n.ahead = 1))
+}
